@@ -87,6 +87,7 @@ class DataGen:
         columns, value_funcs = self._get_meta(sql)
         dbc = self.get_dbclient()
         conn = dbc.get_conn()
+        print("running...")
         if row_count > 0:
             index = 0
             while index < row_count:
