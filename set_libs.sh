@@ -31,3 +31,10 @@ cp /usr/lib/hive/lib/hive-exec.jar ${target}
 cp /usr/lib/hive/lib/commons-lang-2.6.jar ${target}
 # glue catalog jar，使用这个jar实现的AWSGlueDataCatalogHiveClientFactory, 如果需要将数据同步到Glue Catalog需要这个Jar
 cp /usr/lib/hive/auxlib/aws-glue-datacatalog-hive3-client.jar ${target}
+
+sudo yum install git -y
+
+mkdir work&cd work&git clone https://github.com/tingxin/kpmg-data.git
+
+pip3 install -r requirement.txt
+

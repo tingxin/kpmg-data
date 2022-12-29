@@ -1,7 +1,5 @@
 import sys
 from faker import Faker
-from pyspark.sql import SparkSession, DataFrame
-from pyspark.context import SparkContext
 from random import random
 from pysqler import Insert
 from .dbclient import DBClient
