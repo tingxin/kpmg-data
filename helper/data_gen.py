@@ -1,14 +1,8 @@
 import sys
 from faker import Faker
 from random import random
-from pysqler import Insert
-from .dbclient import DBClient
 import time
-# total_rows = 50000000
-# unit_row = 10000
 
-total_rows = 50
-unit_row = 10
 
 faker = Faker()
 
@@ -19,15 +13,6 @@ def facker_bool():
 
 def facker_int():
     return faker.random_int(0, 100000)
-
-
-def flt_trackingnumber():
-    return str(faker.random_int(0, 10000000))
-
-
-flt_columns_checker = {
-    'trackingnumber': flt_trackingnumber
-}
 
 
 class DataGen:
@@ -77,30 +62,19 @@ class DataGen:
     def get_create_table_sql(self) -> str:
         raise ValueError("need implemented in subclass")
 
-    def get_dbclient(self) -> DBClient:
-        raise ValueError("need implemented in subclass")
-
-    def run(self, table_name: str, row_count=-1, time_interval_seconds=0.1):
+    def run(self, row_count=-1, time_interval_seconds=0.1):
         sql = self.get_create_table_sql()
         columns, value_funcs = self._get_meta(sql)
-        dbc = self.get_dbclient()
-        conn = dbc.get_conn()
-        print("running...")
+        yield columns
         if row_count > 0:
             index = 0
             while index < row_count:
                 vv = [func() for func in value_funcs]
-                cmd = Insert(table_name)
-                cmd.add_columns(columns)
-                cmd.add_row(vv)
-                dbc.exec(str(cmd), conn)
+                yield vv
                 index += 1
                 time.sleep(time_interval_seconds)
         else:
             while True:
                 vv = [func() for func in value_funcs]
-                cmd = Insert(table_name)
-                cmd.add_columns(*columns)
-                cmd.add_row(*vv)
-                dbc.exec(str(cmd), conn)
+                yield vv
                 time.sleep(time_interval_seconds)

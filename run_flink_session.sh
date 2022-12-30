@@ -1,4 +1,4 @@
-checkpoints=s3://starrocks/log/flink/ # 这里需要改成你自己的 s3 路径
+checkpoints=s3://tx-log/emr/log/flink/ # 这里需要改成你自己的 s3 路径
 flink-yarn-session -jm 1024 -tm 2048 -s 4 \
  -D state.backend=rocksdb \
 -D state.checkpoint-storage=filesystem \
