@@ -1,3 +1,4 @@
 faker
 pysqler
 pymysql
+kafka-python  
