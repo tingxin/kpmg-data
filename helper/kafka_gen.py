@@ -29,7 +29,7 @@ class KafkaDataGen(DataGen):
 
         producer = self.get_client()
 
-        gen = super().run(10, time_interval_seconds)
+        gen = super().run(row_count, time_interval_seconds)
         columns = next(gen)
 
         print("running...")
