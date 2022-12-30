@@ -1,0 +1,1 @@
+mysql -h demo.c6lwjjfhbm6a.rds.cn-northwest-1.amazonaws.com.cn -P 3306 -u admin -p kpmg_dev < ./script/mysql.sql
